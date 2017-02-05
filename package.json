@@ -1,0 +1,46 @@
+{
+  "name": "proselint",
+  "version": "0.0.1",
+  "description": "Proselint wrapper with a friendly reporter",
+  "author": {
+    "name": "Artem Sapegin",
+    "url": "http://sapegin.me"
+  },
+  "homepage": "https://github.com/sapegin/proselint",
+  "repository": "sapegin/proselint",
+  "license": "MIT",
+  "engines": {
+    "node": ">=6"
+  },
+  "main": "index.js",
+  "bin": {
+    "proselintjs": "index.js"
+  },
+  "files": [
+    "index.js"
+  ],
+  "scripts": {
+    "lint": "eslint . --ext .js --fix",
+    "test": "npm run lint"
+  },
+  "dependencies": {
+    "babel-code-frame": "^6.22.0",
+    "chalk": "^1.1.3",
+    "remark": "^6.2.0",
+    "split-lines": "^1.1.0",
+    "temp-write": "^3.0.0",
+    "unist-util-visit": "^1.1.1"
+  },
+  "keywords": [
+    "proselint",
+    "lint",
+    "linting",
+    "prose",
+    "text",
+    "markdown"
+  ],
+  "devDependencies": {
+    "eslint": "^3.15.0",
+    "eslint-config-tamia": "^3.3.2"
+  }
+}
