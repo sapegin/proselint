@@ -1,15 +1,18 @@
 /* eslint-disable no-console */
+
 const fs = require('fs');
 const exec = require('child_process').exec;
+const padStart = require('lodash/padStart');
 const tempWrite = require('temp-write');
 const chalk = require('chalk');
 const splitLines = require('split-lines');
 const remark = require('remark');
 const visit = require('unist-util-visit');
-const codeFrame = require('babel-code-frame');
 const async = require('async');
 
 const NOT_FOUND = 127;
+const LINES_BEFORE = 1;
+const LINES_AFTER = 1;
 const ICONS = {
 	warning: '⚠',
 	error: '✘',
@@ -69,13 +72,14 @@ function printErrors(contents, errors) {
 	errors.forEach(error => printError(contents, error));
 }
 
-function printError(contents, { line, column, severity, message, check, replacements }) {
-	const code = codeFrame(contents, line, column);
+function printError(contents, { line, column, start, end, severity, message, check, replacements }) {
+	const length = end - start;
+	const block = formatLines(contents, line, column, length);
 	console.log([
 		'',
 		chalk.bold[COLORS[severity]](ICONS[severity] + ' ' + message) + ' ' + chalk.dim(check),
 		replacements ? ('Suggestions: ' + replacements + '\n') : '',
-		code,
+		block,
 		'',
 	].join('\n'));
 }
@@ -117,4 +121,28 @@ function replaceCodeBlocks(contents) {
 		.process(contents)
 	;
 	return lines.join('\n');
+}
+
+function formatLines(contents, line, col, length) {
+	const lines = splitLines(contents);
+	const start = Math.max(0, line - LINES_BEFORE - 1);
+	const end = Math.min(lines.length, line + LINES_AFTER - 1);
+	const totalDigits = String(lines.length + start - 1).length;
+
+	const resultLines = [];
+	for (let lineNum = start; lineNum <= end; lineNum++) {
+		const number = padStart(lineNum, totalDigits);
+
+		let text = lines[lineNum];
+		if (lineNum === line - 1) {
+			text = text.substr(0, col - 1) + chalk.bold.cyan(text.substr(col - 1, length)) + text.substr(col + length - 1);
+		}
+		else {
+			text = chalk.dim(text);
+		}
+
+		resultLines.push(chalk.dim(number) + '  ' + text);
+	}
+
+	return resultLines.join('\n');
 }
