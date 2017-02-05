@@ -11,8 +11,8 @@ const visit = require('unist-util-visit');
 const async = require('async');
 
 const NOT_FOUND = 127;
-const LINES_BEFORE = 1;
-const LINES_AFTER = 1;
+const LINES_BEFORE = 2;
+const LINES_AFTER = 2;
 const ICONS = {
 	warning: '⚠',
 	error: '✘',
