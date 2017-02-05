@@ -136,7 +136,10 @@ function formatLines(contents, line, col, length) {
 
 		let text = lines[lineNum];
 		if (lineNum === line - 1) {
-			text = text.substr(0, col - 1) + chalk.bold.cyan(text.substr(col - 1, length)) + text.substr(col + length - 1);
+			text = text.substr(0, col - 1) +
+				chalk.bold.magenta(text.substr(col - 1, length)) +
+				text.substr(col + length - 1)
+			;
 		}
 		else {
 			text = chalk.dim(text);
