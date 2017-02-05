@@ -33,7 +33,8 @@ module.exports = function(files, cb) {
 			const tempFilepath = tempWrite.sync(safeContents, filepath);
 
 			exec(`proselint --json ${tempFilepath}`, (error, stdout) => {
-				console.log(filepath);
+				console.log();
+				console.log(chalk.underline.bold(filepath));
 
 				if (error) {
 					if (error.code === NOT_FOUND) {
