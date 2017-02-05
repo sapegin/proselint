@@ -93,8 +93,7 @@ function printError(contents, { line, column, severity, message, check, replacem
 	console.log([
 		'',
 		chalk.bold[COLORS[severity]](ICONS[severity] + ' ' + message) + ' ' + chalk.dim(check),
-		replacements && ('Suggestions: ' + replacements),
-		'',
+		replacements ? ('Suggestions: ' + replacements + '\n') : '',
 		code,
 		'',
 	].join('\n'));
