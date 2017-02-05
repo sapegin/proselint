@@ -20,6 +20,8 @@ const COLORS = {
 };
 
 module.exports = function(files, cb) {
+	let amountOfErrors = 0;
+
 	async.eachSeries(
 		files,
 		(filepath, cb) => {
@@ -39,6 +41,8 @@ module.exports = function(files, cb) {
 					const json = JSON.parse(stdout);
 
 					printErrors(contents, json.data.errors);
+
+					amountOfErrors += json.data.errors.length;
 				}
 				else {
 					console.log(chalk.green('No issues found.'));
@@ -47,7 +51,17 @@ module.exports = function(files, cb) {
 				cb();
 			});
 		},
-		cb
+		(err) => {
+			if (err) {
+				return cb(err);
+			}
+
+			if (amountOfErrors) {
+				console.log(chalk[COLORS.warning](amountOfErrors, 'issues found in total.'));
+			}
+
+			return cb();
+		}
 	);
 };
 
