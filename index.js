@@ -16,7 +16,9 @@ if (!pattern) {
 
 const files = glob.sync(pattern);
 if (!files.length) {
-	console.log(chalk.bold.red('No files matched to the given pattern'));
+	console.log(chalk.bold.red('File pattern did not match any files'));
+	console.log();
+	usage();
 	process.exit(1);
 }
 
