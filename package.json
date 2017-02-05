@@ -1,6 +1,6 @@
 {
   "name": "proselint",
-  "version": "0.0.1",
+  "version": "0.0.0-development",
   "description": "Proselint wrapper with a friendly reporter",
   "author": {
     "name": "Artem Sapegin",
@@ -21,7 +21,8 @@
   ],
   "scripts": {
     "lint": "eslint . --ext .js --fix",
-    "test": "npm run lint"
+    "test": "npm run lint",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "dependencies": {
     "async": "^2.1.4",
@@ -43,6 +44,13 @@
   ],
   "devDependencies": {
     "eslint": "^3.15.0",
-    "eslint-config-tamia": "^3.3.2"
+    "eslint-config-tamia": "^3.3.2",
+    "semantic-release": "^6.3.2",
+    "semantic-release-tamia": "^1.1.0"
+  },
+  "release": {
+    "analyzeCommits": "semantic-release-tamia/analyzeCommits",
+    "generateNotes": "semantic-release-tamia/generateNotes",
+    "verifyRelease": "semantic-release-tamia/verifyRelease"
   }
 }
