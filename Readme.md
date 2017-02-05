@@ -4,7 +4,7 @@
 
 [Proselint](http://proselint.com/) wrapper with a friendly reporter. Also skips text in Markdown code blocks.
 
-![](https://d3vv6lp55qjaqc.cloudfront.net/items/3i013t3b443t0P0Z3c1o/proselint.png)
+![](https://d3vv6lp55qjaqc.cloudfront.net/items/3i3x3B143E1r3g0i0W3R/proselint.png)
 
 ## Installation
 
