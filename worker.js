@@ -48,9 +48,6 @@ module.exports = function(files, cb) {
 
 					amountOfErrors += json.data.errors.length;
 				}
-				else {
-					console.log(chalk.green('No issues found.'));
-				}
 
 				cb();
 			});
@@ -60,8 +57,12 @@ module.exports = function(files, cb) {
 				return cb(err);
 			}
 
-			if (amountOfErrors) {
+			console.log();
+			if (amountOfErrors > 0) {
 				console.log(chalk[COLORS.warning](amountOfErrors, 'issues found in total.'));
+			}
+			else {
+				console.log(chalk.green('No issues found.'));
 			}
 
 			return cb();
