@@ -59,7 +59,7 @@ module.exports = function(files, cb) {
 
 			console.log();
 			if (amountOfErrors > 0) {
-				console.log(chalk[COLORS.warning](amountOfErrors, 'issues found in total.'));
+				console.log(chalk[COLORS.warning](`${amountOfErrors} issue${amountOfErrors > 1 ? 's' : ''} found.`));
 			}
 			else {
 				console.log(chalk.green('No issues found.'));
