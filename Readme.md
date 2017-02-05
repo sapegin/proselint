@@ -16,8 +16,9 @@ npm install -g proselint
 ## Usage
 
 ```bash
-proselintjs <filename.md>
-proselintjs <pattern/**/*.md>
+proselintjs filename.md
+proselintjs *.md
+proselintjs 'pattern/**/*.md'
 ```
 
 ## Changelog

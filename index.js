@@ -4,18 +4,19 @@
 
 const chalk = require('chalk');
 const glob = require('glob');
+const flatten = require('lodash/flatten');
 const worker = require('./worker');
 
 /* ---------------- 8< -------- 8< ---------------- */
 
-const pattern = process.argv[2];
-if (!pattern) {
+const patterns = process.argv.slice(2);
+if (patterns.length === 0) {
 	usage();
 	process.exit(1);
 }
 
-const files = glob.sync(pattern);
-if (!files.length) {
+const files = flatten(patterns.map(pattern => glob.sync(pattern)));
+if (files.length === 0) {
 	console.log(chalk.bold.red('File pattern did not match any files'));
 	console.log();
 	usage();
@@ -43,8 +44,9 @@ function usage() {
 	console.log([
 		chalk.underline('Usage'),
 		'',
-		'    ' + chalk.bold('proselintjs') + ' ' + chalk.cyan('<filename.md>'),
-		'    ' + chalk.bold('proselintjs') + ' ' + chalk.cyan('<pattern/**/*.md>'),
+		'    ' + chalk.bold('proselintjs') + ' ' + chalk.cyan('filename.md'),
+		'    ' + chalk.bold('proselintjs') + ' ' + chalk.cyan('*.md'),
+		'    ' + chalk.bold('proselintjs') + ' ' + chalk.cyan("'pattern/**/*.md'"),
 		'',
 	].join('\n'));
 }
