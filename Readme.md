@@ -1,5 +1,6 @@
 # proselint
 
+[![npm](https://img.shields.io/npm/v/proselint.svg)](https://www.npmjs.com/package/proselint)
 [![Build Status](https://travis-ci.org/sapegin/proselint.svg)](https://travis-ci.org/sapegin/proselint)
 
 [Proselint](http://proselint.com/) wrapper with a friendly reporter. Also skips text in Markdown code blocks.
