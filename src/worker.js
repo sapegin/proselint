@@ -59,6 +59,7 @@ module.exports = function(files, cb) {
 
 function printErrors(contents, errors) {
 	errors.forEach(error => printError(contents, error));
+	console.log();
 }
 
 function printError(contents, { line, column, start, end, severity, message, check, replacements }) {
@@ -71,7 +72,6 @@ function printError(contents, { line, column, start, end, severity, message, che
 		) + ' ' + chalk.dim(check),
 		replacements ? ('Suggestions: ' + replacements + '\n') : '',
 		block,
-		'',
 	].join('\n'));
 }
 
