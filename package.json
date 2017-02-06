@@ -12,12 +12,12 @@
   "engines": {
     "node": ">=6"
   },
-  "main": "./src",
+  "main": "src",
   "bin": {
-    "proselintjs": "./src/index.js"
+    "proselintjs": "src/index.js"
   },
   "files": [
-    "./src"
+    "src"
   ],
   "scripts": {
     "lint": "eslint . --ext .js --fix",
