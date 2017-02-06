@@ -17,7 +17,7 @@
     "proselintjs": "./src/index.js"
   },
   "files": [
-    "./src"
+    "src"
   ],
   "scripts": {
     "lint": "eslint . --ext .js --fix",
