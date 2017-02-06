@@ -9,18 +9,7 @@ const splitLines = require('split-lines');
 const remark = require('remark');
 const visit = require('unist-util-visit');
 const async = require('async');
-
-const NOT_FOUND = 127;
-const LINES_BEFORE = 2;
-const LINES_AFTER = 2;
-const ICONS = {
-	warning: '⚠',
-	error: '✘',
-};
-const COLORS = {
-	warning: 'yellow',
-	error: 'red',
-};
+const constants = require('./constants');
 
 module.exports = function(files, cb) {
 	let amountOfErrors = 0;
@@ -37,7 +26,7 @@ module.exports = function(files, cb) {
 				console.log(chalk.underline.bold(filepath));
 
 				if (error) {
-					if (error.code === NOT_FOUND) {
+					if (error.code === constants.NOT_FOUND) {
 						binaryNotFound();
 						process.exit(1);
 					}
@@ -57,12 +46,8 @@ module.exports = function(files, cb) {
 				return cb(err);
 			}
 
-			console.log();
 			if (amountOfErrors > 0) {
-				console.log(chalk[COLORS.warning](`${amountOfErrors} issue${amountOfErrors > 1 ? 's' : ''} found.`));
-			}
-			else {
-				console.log(chalk.green('No issues found.'));
+				return cb(new Error(`${amountOfErrors} issue${amountOfErrors > 1 ? 's' : ''} found.`));
 			}
 
 			return cb();
@@ -79,7 +64,9 @@ function printError(contents, { line, column, start, end, severity, message, che
 	const block = formatLines(contents, line, column, length);
 	console.log([
 		'',
-		chalk.bold[COLORS[severity]](ICONS[severity] + ' ' + message) + ' ' + chalk.dim(check),
+		chalk.bold[constants.COLORS[severity]](
+			constants.ICONS[severity] + ' ' + message
+		) + ' ' + chalk.dim(check),
 		replacements ? ('Suggestions: ' + replacements + '\n') : '',
 		block,
 		'',
@@ -127,8 +114,8 @@ function replaceCodeBlocks(contents) {
 
 function formatLines(contents, line, col, length) {
 	const lines = splitLines(contents);
-	const start = Math.max(0, line - LINES_BEFORE - 1);
-	const end = Math.min(lines.length, line + LINES_AFTER - 1);
+	const start = Math.max(0, line - constants.LINES_BEFORE - 1);
+	const end = Math.min(lines.length, line + constants.LINES_AFTER - 1);
 	const totalDigits = String(lines.length + start - 1).length;
 
 	const resultLines = [];
