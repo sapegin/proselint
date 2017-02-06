@@ -39,7 +39,7 @@ function run(files) {
 				process.exit(1);
 			}
 
-			console.log(chalk[constants.COLORS.green]('No issues found.'));
+			console.log(chalk[constants.COLORS.info]('No issues found.'));
 
 			return null;
 		}
