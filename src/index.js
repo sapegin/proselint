@@ -5,10 +5,13 @@
 const chalk = require('chalk');
 const glob = require('glob');
 const flatten = require('lodash/flatten');
+const updateNotifier = require('update-notifier');
 const worker = require('./worker');
 const constants = require('./constants');
 
-/* ---------------- 8< -------- 8< ---------------- */
+// Update notifier
+const pkg = require('../package.json');
+updateNotifier({ pkg }).notify();
 
 const patterns = process.argv.slice(2);
 if (patterns.length === 0) {
