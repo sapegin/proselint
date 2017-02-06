@@ -24,7 +24,17 @@ proselintjs 'pattern/**/*.md'
 
 ## Configuration
 
-See the original [proselint docs](https://github.com/amperser/proselint/#checks).
+You can disable any rule in `~/.proselintrc`:
+
+```json
+{
+  "checks": {
+    "typography.diacritical_marks": false
+  }
+}
+```
+
+See the original [proselint docs](https://github.com/amperser/proselint/#checks) for more details.
 
 ## Changelog
 
