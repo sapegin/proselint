@@ -6,6 +6,7 @@ const chalk = require('chalk');
 const glob = require('glob');
 const flatten = require('lodash/flatten');
 const worker = require('./worker');
+const constants = require('./constants');
 
 /* ---------------- 8< -------- 8< ---------------- */
 
@@ -31,9 +32,14 @@ function run(files) {
 	worker(
 		files,
 		(err) => {
+			console.log();
+
 			if (err) {
-				return console.error(err);
+				console.error(chalk[constants.COLORS.warning](err));
+				process.exit(1);
 			}
+
+			console.log(chalk[constants.COLORS.green]('No issues found.'));
 
 			return null;
 		}
