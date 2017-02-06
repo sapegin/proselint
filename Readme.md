@@ -22,6 +22,10 @@ proselintjs *.md
 proselintjs 'pattern/**/*.md'
 ```
 
+## Configuration
+
+See the original [proselint docs](https://github.com/amperser/proselint/#checks).
+
 ## Changelog
 
 The changelog can be found on the [Releases page](https://github.com/sapegin/proselint/releases).
