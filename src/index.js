@@ -32,8 +32,6 @@ function run(files) {
 	worker(
 		files,
 		(err) => {
-			console.log();
-
 			if (err) {
 				console.error(chalk[constants.COLORS.warning](err.message));
 				process.exit(1);

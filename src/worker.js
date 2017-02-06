@@ -22,9 +22,8 @@ module.exports = function(files, cb) {
 			const safeContents = replaceCodeBlocks(contents);
 			const tempFilepath = tempWrite.sync(safeContents, filepath);
 
+			const spinner = ora(filepath).start();
 			exec(`proselint --json ${tempFilepath}`, (error, stdout) => {
-				const spinner = ora(filepath).start();
-
 				if (error) {
 					spinner.fail(chalk.underline.bold(filepath));
 
@@ -38,6 +37,9 @@ module.exports = function(files, cb) {
 					printErrors(contents, json.data.errors);
 
 					amountOfErrors += json.data.errors.length;
+				}
+				else {
+					spinner.stop();
 				}
 
 				cb();
