@@ -5,6 +5,7 @@ const exec = require('child_process').exec;
 const padStart = require('lodash/padStart');
 const tempWrite = require('temp-write');
 const chalk = require('chalk');
+const ora = require('ora');
 const splitLines = require('split-lines');
 const remark = require('remark');
 const visit = require('unist-util-visit');
@@ -22,10 +23,11 @@ module.exports = function(files, cb) {
 			const tempFilepath = tempWrite.sync(safeContents, filepath);
 
 			exec(`proselint --json ${tempFilepath}`, (error, stdout) => {
-				console.log();
-				console.log(chalk.underline.bold(filepath));
+				const spinner = ora(filepath).start();
 
 				if (error) {
+					spinner.fail(chalk.underline.bold(filepath));
+
 					if (error.code === constants.NOT_FOUND) {
 						binaryNotFound();
 						process.exit(1);
