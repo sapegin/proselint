@@ -35,7 +35,7 @@ function run(files) {
 			console.log();
 
 			if (err) {
-				console.error(chalk[constants.COLORS.warning](err));
+				console.error(chalk[constants.COLORS.warning](err.message));
 				process.exit(1);
 			}
 
