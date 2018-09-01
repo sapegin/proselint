@@ -9,6 +9,15 @@
 
 ## Installation
 
+### macOS
+
+```bash
+brew install proselint
+npm install -g proselint
+```
+
+### Other platforms
+
 ```bash
 pip install proselint
 npm install -g proselint
