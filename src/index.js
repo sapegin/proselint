@@ -32,28 +32,30 @@ run(files);
 /* ---------------- 8< -------- 8< ---------------- */
 
 function run(files) {
-	worker(
-		files,
-		(err) => {
-			if (err) {
-				console.error(chalk[constants.COLORS.warning](err.message));
-				process.exit(1);
-			}
-
-			console.log(chalk[constants.COLORS.info]('No issues found.'));
-
-			return null;
+	worker(files, err => {
+		if (err) {
+			console.error(chalk[constants.COLORS.warning](err.message));
+			process.exit(1);
 		}
-	);
+
+		console.log(chalk[constants.COLORS.info]('No issues found.'));
+
+		return null;
+	});
 }
 
 function usage() {
-	console.log([
-		chalk.underline('Usage'),
-		'',
-		'    ' + chalk.bold('proselintjs') + ' ' + chalk.cyan('filename.md'),
-		'    ' + chalk.bold('proselintjs') + ' ' + chalk.cyan('*.md'),
-		'    ' + chalk.bold('proselintjs') + ' ' + chalk.cyan("'pattern/**/*.md'"),
-		'',
-	].join('\n'));
+	console.log(
+		[
+			chalk.underline('Usage'),
+			'',
+			'    ' + chalk.bold('proselintjs') + ' ' + chalk.cyan('filename.md'),
+			'    ' + chalk.bold('proselintjs') + ' ' + chalk.cyan('*.md'),
+			'    ' +
+				chalk.bold('proselintjs') +
+				' ' +
+				chalk.cyan("'pattern/**/*.md'"),
+			'',
+		].join('\n')
+	);
 }

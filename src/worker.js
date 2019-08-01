@@ -45,13 +45,17 @@ module.exports = function(files, cb) {
 				cb();
 			});
 		},
-		(err) => {
+		err => {
 			if (err) {
 				return cb(err);
 			}
 
 			if (amountOfErrors > 0) {
-				return cb(new Error(`${amountOfErrors} issue${amountOfErrors > 1 ? 's' : ''} found.`));
+				return cb(
+					new Error(
+						`${amountOfErrors} issue${amountOfErrors > 1 ? 's' : ''} found.`
+					)
+				);
 			}
 
 			return cb();
@@ -64,32 +68,41 @@ function printErrors(contents, errors) {
 	console.log();
 }
 
-function printError(contents, { line, column, start, end, severity, message, check, replacements }) {
+function printError(
+	contents,
+	{ line, column, start, end, severity, message, check, replacements }
+) {
 	const length = end - start;
 	const block = formatLines(contents, line, column, length);
-	console.log([
-		'',
-		chalk.bold[constants.COLORS[severity]](
-			constants.ICONS[severity] + ' ' + message
-		) + ' ' + chalk.dim(check),
-		replacements ? ('Suggestions: ' + replacements + '\n') : '',
-		block,
-	].join('\n'));
+	console.log(
+		[
+			'',
+			chalk.bold[constants.COLORS[severity]](
+				constants.ICONS[severity] + ' ' + message
+			) +
+				' ' +
+				chalk.dim(check),
+			replacements ? 'Suggestions: ' + replacements + '\n' : '',
+			block,
+		].join('\n')
+	);
 }
 
 function binaryNotFound() {
-	console.log([
-		chalk.bold.red('Proselint not found'),
-		'',
-		'Install proselint first:',
-		'',
-		'    pip install proselint',
-		'',
-		'More information:',
-		'',
-		'    ' + chalk.underline('https://github.com/amperser/proselint/'),
-		'',
-	].join('\n'));
+	console.log(
+		[
+			chalk.bold.red('Proselint not found'),
+			'',
+			'Install proselint first:',
+			'',
+			'    pip install proselint',
+			'',
+			'More information:',
+			'',
+			'    ' + chalk.underline('https://github.com/amperser/proselint/'),
+			'',
+		].join('\n')
+	);
 }
 
 // Replace all lines inside code blocks with empty lines becase proselint validates code by default.
@@ -111,8 +124,7 @@ function replaceCodeBlocks(contents) {
 	const lines = splitLines(contents);
 	remark()
 		.use(processCode)
-		.process(contents)
-	;
+		.process(contents);
 	return lines.join('\n');
 }
 
@@ -128,10 +140,10 @@ function formatLines(contents, line, col, length) {
 
 		let text = lines[lineNum];
 		if (lineNum === line - 1) {
-			text = text.substr(0, col - 1) +
+			text =
+				text.substr(0, col - 1) +
 				chalk.bold.magenta(text.substr(col - 1, length)) +
-				text.substr(col + length - 1)
-			;
+				text.substr(col + length - 1);
 		}
 		else {
 			text = chalk.dim(text);

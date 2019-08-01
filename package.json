@@ -20,9 +20,12 @@
     "src"
   ],
   "scripts": {
-    "lint": "eslint . --ext .js --fix",
-    "test": "npm run lint",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "pretest": "npm run lint",
+    "test": "",
+    "posttest": "npm run format",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "lint": "eslint . --cache --fix",
+    "format": "prettier --write \"**/*.{js,md}\""
   },
   "dependencies": {
     "async": "^2.1.4",
@@ -47,6 +50,9 @@
   "devDependencies": {
     "eslint": "^3.15.0",
     "eslint-config-tamia": "^3.3.2",
+    "husky": "^3.0.2",
+    "lint-staged": "^9.2.1",
+    "prettier": "^1.18.2",
     "semantic-release": "^6.3.2",
     "semantic-release-tamia": "^1.1.0"
   },
@@ -54,5 +60,20 @@
     "analyzeCommits": "semantic-release-tamia/analyzeCommits",
     "generateNotes": "semantic-release-tamia/generateNotes",
     "verifyRelease": "semantic-release-tamia/verifyRelease"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,md}": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
   }
 }
