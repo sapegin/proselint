@@ -2,12 +2,8 @@ language: node_js
 cache:
   directories:
     - node_modules
-  yarn: true
 node_js:
-  - 6
-  - 7
-after_success:
-  - npm run semantic-release
+  - 12
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/

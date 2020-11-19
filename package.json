@@ -4,7 +4,7 @@
   "description": "Proselint wrapper with a friendly reporter",
   "author": {
     "name": "Artem Sapegin",
-    "url": "http://sapegin.me"
+    "url": "https://sapegin.me"
   },
   "homepage": "https://github.com/sapegin/proselint",
   "repository": "sapegin/proselint",
@@ -23,7 +23,6 @@
     "pretest": "npm run lint",
     "test": "",
     "posttest": "npm run format",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "lint": "eslint . --cache --fix",
     "format": "prettier --write \"**/*.{js,md}\""
   },
@@ -52,14 +51,7 @@
     "eslint-config-tamia": "^3.3.2",
     "husky": "^3.0.2",
     "lint-staged": "^9.2.1",
-    "prettier": "^1.18.2",
-    "semantic-release": "^6.3.2",
-    "semantic-release-tamia": "^1.1.0"
-  },
-  "release": {
-    "analyzeCommits": "semantic-release-tamia/analyzeCommits",
-    "generateNotes": "semantic-release-tamia/generateNotes",
-    "verifyRelease": "semantic-release-tamia/verifyRelease"
+    "prettier": "^1.18.2"
   },
   "husky": {
     "hooks": {

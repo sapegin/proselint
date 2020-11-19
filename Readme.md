@@ -4,7 +4,7 @@
 
 [Proselint](http://proselint.com/) wrapper with a friendly reporter. Also skips text in Markdown code blocks.
 
-![](https://d3vv6lp55qjaqc.cloudfront.net/items/3i3x3B143E1r3g0i0W3R/proselint.png)
+![Proselint](https://d3vv6lp55qjaqc.cloudfront.net/items/3i3x3B143E1r3g0i0W3R/proselint.png)
 
 ## Installation
 
@@ -54,6 +54,6 @@ Everyone is welcome to contribute. Please take a moment to review the [contribut
 
 ## Authors and license
 
-[Artem Sapegin](http://sapegin.me) and [contributors](https://github.com/sapegin/proselint/graphs/contributors).
+[Artem Sapegin](https://sapegin.me) and [contributors](https://github.com/sapegin/proselint/graphs/contributors).
 
 MIT License, see the included [License.md](License.md) file.
